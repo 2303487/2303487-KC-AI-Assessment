@@ -1,0 +1,65 @@
+# sciFLT scilab Fuzzy Logic Toolbox
+<REVISION>
+ <revision>@REV@
+
+<DESCRIPTION>
+ <name>Example
+ <comment>Example FLS demonstarting a very simplistic Fuzzy System
+ <type>m
+ <SNorm>max
+ <SNormPar>0
+ <TNorm>min
+ <TNormPar>0
+ <Comp>one
+ <CompPar>0
+ <ImpMethod>min
+ <AggMethod>max
+ <defuzzMethod>centroide
+
+<INPUT>
+ <name>quality
+ <range>0 100
+  <mf_name>low
+   <mf_type>trimf
+   <mf_par>-40 0 71
+  <mf_name>medium
+   <mf_type>trapmf
+   <mf_par>5 29 74 95
+  <mf_name>high
+   <mf_type>sigmf
+   <mf_par>0.068 25
+
+ <name>service
+ <range>0 1
+  <mf_name>low
+   <mf_type>trimf
+   <mf_par>-0.4 0 0.4
+  <mf_name>medium
+   <mf_type>trimf
+   <mf_par>0.1 0.5 0.9
+  <mf_name>high
+   <mf_type>trimf
+   <mf_par>0.5 1 1.4
+
+<OUTPUT>
+ <name>tip
+ <range>0 20
+  <mf_name>low
+   <mf_type>trimf
+   <mf_par>-8 0 8
+  <mf_name>medium
+   <mf_type>trimf
+   <mf_par>2 10 18
+  <mf_name>big
+   <mf_type>trimf
+   <mf_par>12 20 28
+
+<RULE>
+1 1 1 1 1.0
+2 1 1 1 1.0
+2 2 2 1 1.0
+1 2 1 1 1.0
+3 2 2 1 1.0
+2 3 2 1 1.0
+3 3 3 1 1.0
+
