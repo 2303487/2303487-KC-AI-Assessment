@@ -19,24 +19,24 @@ int main()
 	InputVariable* obstacle = new InputVariable;
 	obstacle->setName("obstacle");
 	obstacle->setRange(0.0, 1.0);
-	obstacle->addTerm(new Triangle("left", 0, 0.05, 0.6));
-	obstacle->addTerm(new Triangle("right", 0.4, 0.95, 1.0));
+	obstacle->addTerm(new Triangle("Left", 0, 0.05, 0.6));
+	obstacle->addTerm(new Triangle("Right", 0.4, 0.95, 1.0));
 	engine->addInputVariable(obstacle);
 
 	// Input Variable: Collectible
 	InputVariable* collectible = new InputVariable;
 	collectible->setName("collectible");
 	collectible->setRange(0.0, 1.0);
-	collectible->addTerm(new Triangle("left", 0.0, 0.1, 0.3));
-	collectible->addTerm(new Triangle("right", 0.7, 0.9, 1.0));
+	collectible->addTerm(new Triangle("Left", 0.0, 0.1, 0.3));
+	collectible->addTerm(new Triangle("Right", 0.7, 0.9, 1.0));
 	engine->addInputVariable(collectible);
 
 	// Input Variable: Speed
 	InputVariable* speed = new InputVariable;
 	speed->setName("speed");
 	speed->setRange(0.0, 1.0);
-	speed->addTerm(new Triangle("moving_left", 0, 0.3, 0.6));
-	speed->addTerm(new Triangle("moving_right", 0.4, 0.7, 1.0));
+	speed->addTerm(new Triangle("movieLeft", 0, 0.3, 0.6));
+	speed->addTerm(new Triangle("movieRight", 0.4, 0.7, 1.0));
 	speed->addTerm(new Triangle("none", 0.2, 0.5, 0.8));
 	engine->addInputVariable(speed);
 
@@ -44,8 +44,8 @@ int main()
 	OutputVariable* mSteer = new OutputVariable;
 	mSteer->setName("mSteer");
 	mSteer->setRange(0.0, 1.0);
-	mSteer->addTerm(new Triangle("left", 0, 0.3, 0.6));
-	mSteer->addTerm(new Triangle("right", 0.4, 0.7, 1.0));
+	mSteer->addTerm(new Triangle("Left", 0, 0.3, 0.6));
+	mSteer->addTerm(new Triangle("Right", 0.4, 0.7, 1.0));
 	mSteer->addTerm(new Triangle("slightLeft", 0, 0.15, 0.3));
 	mSteer->addTerm(new Triangle("slightRight", 0.7, 0.85, 1.0));
 	mSteer->setDefuzzifier(new WeightedAverage());
@@ -57,10 +57,10 @@ int main()
 	RuleBlock* mamdani = new RuleBlock;
 	mamdani->setConjunction(new Minimum);
 	mamdani->setImplication(new AlgebraicProduct);
-	mamdani->addRule(Rule::parse("if obstacle is left then mSteer is right", engine));
-	mamdani->addRule(Rule::parse("if obstacle is right then mSteer is left", engine));
-	mamdani->addRule(Rule::parse("if obstacle is not left and collectible is left then mSteer is slightLeft", engine));
-	mamdani->addRule(Rule::parse("if obstacle is not right and collectible is right then mSteer is slightRight", engine));
+	mamdani->addRule(Rule::parse("if obstacle is Left then mSteer is Right", engine));
+	mamdani->addRule(Rule::parse("if obstacle is Right then mSteer is Left", engine));
+	mamdani->addRule(Rule::parse("if obstacle is not Left and collectible is Left then mSteer is slightLeft", engine));
+	mamdani->addRule(Rule::parse("if obstacle is not Right and collectible is Right then mSteer is slightRight", engine));
 	engine->addRuleBlock(mamdani);
 
 	// Check if engine is ready
@@ -116,7 +116,7 @@ int main()
 			{
 				if (y == GAME_HEIGHT - 1 && x == carPos) std::cout << "C"; // Car
 				else if (y == obstaclePosY && x == obstaclePosX) std::cout << "O"; // Obstacle
-				else if (y == collectiblePosY && x == collectiblePosX) std::cout << "$"; // Collectible
+				else if (y == collectiblePosY && x == collectiblePosX) std::cout << "$"; // Collectible, $ used cause £ caused an Error
 				else std::cout << ".";
 			}
 			std::cout << std::endl;
@@ -133,12 +133,12 @@ int main()
 		// Collision or collectible check
 		if (carPos == obstaclePosX && obstaclePosY == GAME_HEIGHT - 1)
 		{
-			std::cout << "Collision! Game Over." << std::endl;
+			std::cout << "You Crashed! Game Over." << std::endl;
 			break;
 		}
 		if (carPos == collectiblePosX && collectiblePosY == GAME_HEIGHT - 1)
 		{
-			std::cout << "Collectible gathered!" << std::endl;
+			std::cout << "Collectible Aquired!" << std::endl;
 			score += 10;
 		}
 
